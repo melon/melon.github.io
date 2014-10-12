@@ -7,7 +7,7 @@ tags:
 ---
 最近偶然间在Chrome的开发者工具栏下看到这么一小模块
 
-![rendered fonts](http://d.pcs.baidu.com/thumbnail/aa00ce6af970ba46e8fb4c0959b00876?fid=3008397551-250528-466397947950662&time=1413111600&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-su%2Fj%2FIYgBrrIk50J8NDYAJllVRw%3D&rt=sh&expires=2h&r=750337266&sharesign=unknown&size=c1366_u768&quality=90)
+![rendered fonts](http://ww1.sinaimg.cn/mw1024/9047644agw1el8przyi9sj206j029a9z.jpg)
 
 很显然它的意思是，当前选中的元素下的字符用到了12个TakaoPGothic字体的字形(glyph)和5个WenQuanYi Micro Hei字体的字形。那浏览器到底是怎么决定最后显示我们所看到的字呢？
 
