@@ -100,21 +100,178 @@ h1,h2,h3,h4,h5,h6,hgroup
 
 {% code lang:html %}
 <body>
-
   <h1>Apples</h1>
   <p>Apples are fruit.</p>
-
   <h2>Taste</h2>
   <p>They taste lovely.</p>
-
   <h3>Sweet</h3>
   <p>Red apples are sweeter than green ones.</p>
-
   <h2>Colour</h2>
   <p>Apples come in various colours.</p>
-
 </body>
 {% endcode %}
+
+上面的代码很显而易见，如果稍微改动一下
+
+{% code lang:html %}
+<body>
+  <h1>Apples</h1>
+  <p>Apples are fruit.</p>
+  <h2>Taste</h2>
+  <p>They taste lovely.</p>
+  <h3>Sweet</h3>
+  <h3>Hot</h3>
+  <h4>Very Hot</h4>
+  <h3>Bitter</h3>
+  <h2>Colour</h2>
+  <p>Apples come in various colours.</p>
+</body>
+{% endcode %}
+
+得到的结构就是
+
+{% code lang:html %}
+1. Apples
+   1.1 Taste
+       1.1.1 Sweet
+       1.1.2 Hot
+             1.1.2.1 Very Hot
+       1.1.3 Bitter
+   1.2 Colour
+{% endcode %}
+
+看着这种转化过程是不是看着有种“堆栈”的感觉？其实生成大纲的算法里确实用到了stack。
+
+说到这，向大家推荐一个由文档生成大纲的在线生成工具，由一位程序员所写，[HTML5 Outliner](http://hoyois.github.io/html5outliner/)
+
+## 分区根元素（sectioning roots）
+
+所谓分区根元素，就是指这个元素自己的子元素能形成一个大纲，但是这个大纲并不会包含在这个元素的祖先节点（ancestor）的大纲之中，含有这种特点的元素有body，blockquote，details，dialog，fieldset，figure，td。
+
+{% code lang:html %}
+<section>
+  <h1>Forest elephants</h1>
+  <section>
+    <h2>Introduction</h2>
+    <p>In this section, we discuss the lesser known forest elephants</p>
+  </section>
+  <section>
+    <h2>Habitat</h2>
+    <p>Forest elephants do not live in trees but among them. Let's
+       look what scientists are saying in "<cite>The Forest Elephant in Borneo</cite>":</p>
+    <blockquote>
+       <h1>Borneo</h1>
+       <p>The forest element lives in Borneo...</p>
+    </blockquote>
+  </section>
+</section>
+{% endcode %}
+
+这个例子的大纲是
+
+{% code lang:html %}
+1. Forest elephants
+   1.1 Introduction
+   1.2 Habitat
+{% endcode %}
+
+可以看到blockquote里的大纲并未包含在主大纲（main outline）中。
+
+## 大纲生成算法（Outline Algorithm）
+
+具体算法过程可以参阅 [大纲生成算法](https://html.spec.whatwg.org/multipage/semantics.html#outlines)
+
+## 一些例子
+
+### 1.
+
+{% code lang:html %}
+<section>
+  <h1>Apples</h1>
+  <p>Pomaceous.</p>
+  <h1>Bananas</h1>
+  <p>Edible.</p>
+  <h1>Carambola</h1>
+  <p>Star.</p>
+</section>
+{% endcode %}
+
+上面这个例子很有迷惑性，其实它的大纲是
+
+{% code lang:html %}
+1. Apples
+2. Bananas
+3. Carambola
+{% endcode %}
+
+而不是
+
+<del>1. Apples</del>
+   <del style="margin-left:1em;">1.1 Bananas</del>
+   <del style="margin-left:1em;">1.2 Carambola</del>
+
+这是因为当存在同级头元素时，后一个头元素会终结前一个同级元素的区块，然后自己新建一个区块
+
+### 2.
+
+{% code lang:html %}
+<section>
+  <section>
+    <h1>A plea from our caretakers</h1>
+    <p>Please, we beg of you, send help! We're stuck in the server room!</p>
+  </section>
+  <h1>Feathers</h1>
+  <p>Epidermal growths.</p>
+</section>
+{% endcode %}
+
+大纲是
+
+{% code lang:html %}
+1. (untitled section)
+  1.1 A plea from our caretakers
+2. Feathers
+{% endcode %}
+
+“Feathers”这个标题不会成为第一个section的标题，如果section下的第一个头元素之前没有子区块，那么这个头元素就是父区块的标题，否则它就会自动新形成一个区块。
+
+### 3.
+
+所以，在一个article元素中，如果第一个头元素h1不在第一个子区块之前的话，那么这个h1标题从大纲的角度来说就不是这个article元素的标题了。
+
+{% code lang:html %}
+<!DOCTYPE HTML>
+<title>We're adopting a child! — Ray's blog</title>
+<h1>Ray's blog</h1>
+<article>
+  <header>
+    <nav>
+      <a href="?t=-1d">Yesterday</a>;
+      <a href="?t=-7d">Last week</a>;
+      <a href="?t=-1m">Last month</a>
+    </nav>
+    <h1>We're adopting a child!</h1>
+  </header>
+  <main>
+    <p>As of today, Janine and I have signed the papers to become
+    the proud parents of baby Diane! We've been looking forward to
+    this day for weeks.</p>
+  </main>
+</article>
+{% endcode %}
+
+它的大纲是
+
+{% code lang:html %}
+1. Ray's blog
+   1.1 Untitled article
+       1.1.1 Untitled navigation section
+   1.2 We're adopting a child!
+{% endcode %}
+
+## 总结
+
+section和outline应该算HTML语义化里比较重要的一个东西，之前一直觉得语义化是个很虚很没意思的东西，这次研究了一下发现还蛮有说法的。
 
 - References:
   1. [Sections and Outlines of an HTML5 Document](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document)
