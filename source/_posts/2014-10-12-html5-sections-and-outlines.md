@@ -13,14 +13,18 @@ outline: 大纲
 sectioning root:
 blockquote,body,details,dialog,fieldset,figure,td
 
-sectioning content, sectioning elements:
+sectioning content, sectioning elements（分区元素）:
 article,aside,nav,section
 
 heading content, heading elements:
 h1,h2,h3,h4,h5,h6,hgroup
 </pre>
 
-文档的语义结构是由section和sub-section来描述的，文档被划分成一块块区域之后，就有了一个outline（大纲）。在HTML4时代，并不存在显性的section标签，文档中section的划分是由div元素和heading elements（h1，h2，h3，h4，h5，h6，hgroup）来隐性地(implicitly)决定的，HMML4文档完全考这几个元素来确定文档的结构和它的outline。
+注意：以下概念目前应该还只是个规范，在浏览器似乎尚未有应有的范例。
+
+## HTML5的优势
+
+文档的语义结构是由section和sub-section来描述的，文档被划分成一块块区域之后，就有了一个outline（大纲）。在HTML4时代，并不存在显性的section标签，文档中section的划分是由heading elements（h1，h2，h3，h4，h5，h6，hgroup）来隐性地(implicitly)决定的，HMML4文档完全靠这几个元素来确定文档的结构和它的outline。
 
 但是，HMTL4对于文档结构的定义以及outlining(获取大纲的)算法过于粗略，引发了很多问题：
 
@@ -34,6 +38,84 @@ h1,h2,h3,h4,h5,h6,hgroup
 
 总的来说，就是HMTL5明确了分区的一些概念，使得文档大纲能被浏览器分析出来，从而能被利用来提升用户体验。
 
+
+## 显性分区（explicit sectioning）
+
+前面提到，只有这四个元素article，section，nav，aside是具有显性分区作用的，另外h1-h6，hgroup这几个元素有隐形分区的效果，文档中的这11个元素决定了大纲的结构。首先看个例子
+
+{% code lang:html %}
+<body>
+  <h1>Apples</h1>
+  <p>Apples are fruit.</p>
+  <section>
+    <h1>Taste</h1>
+    <p>They taste lovely.</p>
+    <section>
+      <h1>Sweet</h1>
+      <p>Red apples are sweeter than green ones.</p>
+    </section>
+  </section>
+  <section>
+    <h1>Colour</h1>
+    <p>Apples come in various colours.</p>
+  </section>
+</body>
+{% endcode %}
+
+上面这个例子完全显性地定义了文档的大纲结构。可以发现，我们用了多个相同的h1标签，但是这些h1标签能来描述不同的层级，这在HMTL4里是做不到的。上面文档形成的大纲结构如下
+
+{% code lang:html %}
+1. Apples
+   1.1 Taste
+       1.1.1 Sweet
+   1.2 Colour
+{% endcode %}
+
+采用相同的h1标签的一个好处就是在维护的时候方便了，例如在编辑的时候如果想提升或降低层级，无需再去繁琐地修改标签名了。当然也有人更倾向于明确地指出层级，直接从代码就能一目了然地看出文档结构，并且不同的heading标签在样式上处理也更为方便，如下
+
+{% code lang:html %}
+<body>
+  <h1>Apples</h1>
+  <p>Apples are fruit.</p>
+  <section>
+    <h2>Taste</h2>
+    <p>They taste lovely.</p>
+    <section>
+      <h3>Sweet</h3>
+      <p>Red apples are sweeter than green ones.</p>
+    </section>
+  </section>
+  <section>
+    <h2>Colour</h2>
+    <p>Apples come in various colours.</p>
+  </section>
+</body>
+{% endcode %}
+
+## 隐性分区（implicit sectioning）
+
+由于HTML5中的显性分区元素（article，section，nav，aside）并不要求强制使用，同时又考虑到需要保持对HTML4文档的兼容性，这个时候隐性分区显得就有必要了。
+
+上面的例子如果希望用隐性分区方式得到相同的大纲结构，会怎么写呢？
+
+{% code lang:html %}
+<body>
+
+  <h1>Apples</h1>
+  <p>Apples are fruit.</p>
+
+  <h2>Taste</h2>
+  <p>They taste lovely.</p>
+
+  <h3>Sweet</h3>
+  <p>Red apples are sweeter than green ones.</p>
+
+  <h2>Colour</h2>
+  <p>Apples come in various colours.</p>
+
+</body>
+{% endcode %}
+
 - References:
-    1. [Sections and Outlines of an HTML5 Document](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document)
-    2. [4.3 Sections](https://html.spec.whatwg.org/multipage/semantics.html#sections)
+  1. [Sections and Outlines of an HTML5 Document](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document)
+  2. [4.3 Sections](https://html.spec.whatwg.org/multipage/semantics.html#sections)
