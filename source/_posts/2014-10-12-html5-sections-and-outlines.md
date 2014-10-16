@@ -32,6 +32,8 @@ h1,h2,h3,h4,h5,h6,hgroup
 
 4.同样是因为在HTML4中任何一个区块都是文档大纲的一部分，那些应该和整个网站相关的内容也被包含到文档大纲里了，比如logo、菜单、目录、版权信息、用户协议等内容。所以，HMTL5引入了一些元素，比如nav可以用来包含一个链接组或链接式的目录，header和footer里可以放一些和网站相关的信息。
 
+总的来说，就是HMTL5明确了分区的一些概念，使得文档大纲能被浏览器分析出来，从而能被利用来提升用户体验。
+
 - References:
     1. [Sections and Outlines of an HTML5 Document](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document)
     2. [4.3 Sections](https://html.spec.whatwg.org/multipage/semantics.html#sections)
