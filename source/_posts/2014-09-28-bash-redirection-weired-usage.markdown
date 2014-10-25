@@ -5,6 +5,7 @@ categories:
 tags:
 - linux
 - security
+- bash
 ---
 今天看了[耗子叔](http://t.sina.com.cn/haoel)新发的关于最近那个沸沸扬扬的bash漏洞的一篇博客[bash代码注入的安全漏洞](http://coolshell.cn/articles/11973.html)，文章浅显易懂，基本上比较好理解。唯一让我疑惑了一会儿的地方是这个指令
 

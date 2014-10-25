@@ -3,6 +3,7 @@ date: 2014-10-25 20:47:20
 categories:
 - IT
 tags:
+- linux
 - bash
 ---
 \`COMMANDS\`和$(COMMANDS)两者都是用来在脚本中实现指令替换的，两者都符合POSIX标准，虽然`...`(backticks)这种形式在很多主流脚本中很常见，但是后者是更为推荐的指令替换写法。
