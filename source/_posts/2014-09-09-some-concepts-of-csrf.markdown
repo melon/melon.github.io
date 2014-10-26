@@ -4,6 +4,7 @@ categories:
 - IT
 tags:
 - frontend
+- javascript
 - security
 ---
 跨站请求伪造，Cross-site request forgery，简写成CSRF或XSRF。[这里](http://www.veracode.com/security/csrf)有一段关于CSRF的定义

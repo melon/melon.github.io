@@ -4,6 +4,7 @@ categories:
 - IT
 tags:
 - frontend
+- javascript
 ---
 今天在研读express-session代码的[这段代码](https://github.com/expressjs/session/blob/master/index.js)的时候，看到了一段代码。
 
