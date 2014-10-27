@@ -1,4 +1,4 @@
-title: key-point-of-getting-git-on-server
+title: 在服务器上部署git仓库时的要点剖析
 date: 2014-10-27 13:00:45
 categories:
 - IT
