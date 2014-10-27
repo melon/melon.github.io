@@ -3,6 +3,7 @@ date: 2014-08-26 15:32
 categories:
 - IT
 tags:
+- frontend
 - html
 ---
 我之前在制作[专治强迫症头像生成器ヽ(✿ﾟ▽ﾟ)ノ](http://www.bpzufang.com/ocd)的时候，遇到了一个和html的form标签有关的问题，最初是百思不得其解，后来总算搞清楚了。

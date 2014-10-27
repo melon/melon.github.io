@@ -1,4 +1,4 @@
-title: '博客从Octopress迁移到hexo'
+title: 博客从Octopress迁移到hexo
 date: 2014-10-16 18:50:28
 categories:
 - 碎
