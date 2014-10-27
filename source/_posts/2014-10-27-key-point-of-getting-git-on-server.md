@@ -5,7 +5,7 @@ categories:
 tags:
 - git
 ---
-每次想在服务器上部署git仓库的时候，都忘记了步骤，每每比求助于这个[页面](http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server)，我想我有必要对一些关键点进行剖析，以帮助记忆。
+每次想在服务器上部署git仓库的时候，都忘记了步骤，于是每次都得求助于这个[页面](http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server)，我想我有必要对一些关键点进行剖析，以帮助记忆。
 
 ### I
 
