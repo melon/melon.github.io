@@ -50,6 +50,6 @@ for (var key2 in b) {
 
 **EDIT:** for in对所有可列举(enumerable)属性进行遍历，像由Array、Object这些内置构造器构造出来的对象，继承了Object.prototype和String.prototype中的不可列举属性，比如String类型的indexOf()函数、Object的toString()函数，这些函数都不会被for in遍历。
 
--References:
+- References:
     1.[Object.prototype.hasOwnProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
     2.[for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
