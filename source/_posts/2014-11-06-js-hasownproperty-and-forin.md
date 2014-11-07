@@ -9,9 +9,9 @@ tags:
 ---
 其实在很早之前就知道hasOwnProperty和for in之间似乎是存在着某种关系，似乎也曾好几次看到网上很多的解释，但是总是很快就忘了它们之间的“渊源”。今天总算逮到一个机会让我能比较形象和深刻地感知到它们之间的联系了。
 
-事情是源自将React从0.11.2版本升级到了0.12.0版本，0.12.0版本有了许多重大的改动，于是console当中报了很多warning。与今天讲的主题相关的warning是copyProperties和merge这俩模块被标为deprecated了，官方推荐用Object.asign模块来替代这两个即将废弃的模块。前两个模块被废弃的主要原因是在用for in遍历对象属性的时候没有加入hasOwnProperty函数来检查，有没有用hasOwnProperty函数检查的区别在于是否将对象原型链上的属性列入考虑范围之内。也就是说，**for in是遍历对象的所有属性（其实应该还有更复杂的东西要考虑，先不讨论），包括原型链上的属性，而hasOwnPropery函数能识别出对象的直接属性**。
+事情是源自将React从0.11.2版本升级到了0.12.0版本，0.12.0版本有了许多重大的改动，于是console当中报了很多warning。与今天讲的主题相关的warning是copyProperties和merge这俩模块被标为deprecated了，官方推荐用Object.assign模块来替代这两个即将废弃的模块。前两个模块被废弃的主要原因是在用for in遍历对象属性的时候没有加入hasOwnProperty函数来检查，有没有用hasOwnProperty函数检查的区别在于是否将对象原型链上的属性列入考虑范围之内。也就是说，**for in是遍历对象的所有属性（其实应该还有更复杂的东西要考虑，先不讨论），包括原型链上的属性，而hasOwnPropery函数能识别出对象的直接属性**。而官方之所以推荐Object.assign，是因为它是ES6规范中新引入的一个方法，用来代替现有的五花八门的对象属性复制函数的。由于Object.assign目前几乎没有浏览器支持，所以facebook写了个polyfill，其中就加入了hasOwnProperty的判断。
 
-来个例子
+来个例子帮助理解hasOwnProperty和for in
 
 {% code lang:js %}
 function A () {
