@@ -1,4 +1,4 @@
-title: "【翻】给它个五分钟"
+title: 【翻】给它个五分钟
 date: 2014-09-25 11:34
 categories:
 - Translation
@@ -46,3 +46,6 @@ Richard把他整个职业生涯都用来思考这些问题，他研究了30年�
 
 
 原文：[Give it five minutes](https://signalvnoise.com/posts/3124-give-it-five-minutes)
+
+* 本篇博客遵循[Creative Commons](http://creativecommons.org/)协议，转载请以链接形式标明本文地址
+本文地址：[http://melon.github.io/blog/2014/09/25/translation-give-it-five-minutes/](http://melon.github.io/blog/2014/09/25/translation-give-it-five-minutes/)
