@@ -141,9 +141,69 @@ Service Workers通过在重复访问时来缓存视图（view）和资源（asse
 
 我们知道，如果数组中某个元素变了，我们需要对数组中的每个元素进行一个对比操作，这是一项非常耗费资源的操作。现在让我们假象一下我们所用的并不是vanilla数组，而是不可变的数组。这种数组可以通过Facebook的immutable-js或者Mori来创建。这个时候当更改了数组中的一个元素之后，我们得到了一个新的数组，这个新的数组在内存中会有一个新的引用地址。
 
-假设说我们回头检查发现数组的引用地址是一样的，那么数组肯定没有发生变化。数组中的值肯定是一样的。这样，我们就能做所有事情了，像快速高效地比较俩数组是否相等。之所以高效是因为你只是检查了数组的引用，而没有去一个一个地对比Todos数组中的每个元素。
+假设说我们回头检查发现数组的引用地址是一样的，那么数组肯定没有发生变化，数组中的值肯定是一样的。按照这个推论，我们就能做各种各样的事情了，像快速高效地比较俩数组是否相等，而之所以高效是因为你只是检查了数组的引用，而不需要去一个一个地对比Todos数组中的每个元素，前一个的操作比后一个节省资源。
 
+之前说了，不可变性保证数据结构（例如Todos）不会发生被更改的情况。比如下面的例子：
 
+<blockquote style="text-align:left">
+var todos = [‘Item 1', ‘Item 2', ‘Item 3'];
+updateTodos(todos, newItem);
+destructiveOpOnTodos(todos);
+console.assert(todos.length === 3);
+</blockquote>
+
+按照上面的说法，当tods数组被创建之后，后面的任何一个操作，都不会改变这个数组。虽然你可能通过严格的代码就能保证数据结构不发生变化，但是用了不可变数据结构之后，这种“可能”就会编程“肯定”了。
+
+我之前曾经用现有的像Mutation Observers这样的平台技术来实现过一个Undo的项目，如果你使用这样的技术来做，你会发现内存消耗会直线上涨。但是要是采用持续性数据结构，内存使用量就会大大减少。
+
+不可变这个特性有很多好处，包括：
+
+- 一些典型的对其他对象做的具有“破坏性”的更新操作，像添加、附加、删除，可以避免不期望发生的副作用。
+
+- 你可以把所有更新的操作看作是产生一个新的值。这样当你把对象作为参数传给函数的时候，无需再担心这些函数会无意中更改这个对象。
+
+- 这些好处对编写web app很有帮助，但是你也可以不选择依赖它们。
+
+不可变特性和React之类的框架又有什么联系呢？好吧，我们首先来谈谈应用状态（application state）的概念。如果用不可变数据结构来表示状态，当重新渲染整个app（或单个component）的时候，就可以通过查看引用是否相等来判断状态是否发生变化了。如果内存引用是一样的，你就可以完全确定数据并未发生变化，这样你就能非常肯定React它不需要重新渲染了。
+
+那么Object.freeze又是什么？如果你去读MDN上关于Object.freeze()的[描述](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)，你也许会好奇为了实现不可变数据结构为什么还需要其他额外的库？Object.freeze()能够“冻结”一个对象，阻止在对象上新建属性、删除属性和修改原有属性以及属性的可枚举性（enumerability）、可配置性（configurability）或可写性（writability）。也就是说对象实质上是高效地实现了不可变的特性。那么，为什么不用Object.freeze()来实现不可变数据结构？还缺啥？
+
+理论上来说你可以用Object.freeze()来实现不可变数据结构，但是，当你要想改变这些不可变的对象的时候，你需要对整个对象进行一次深度拷贝，修改相应的值，然后再“冻结”住这个新对象。通常这对多数实际应用的场景来说太慢了！这也是为什么像immutable-js和mori这样的解决方案会得到亲徕。这些库不仅仅帮助实现不可变数据库，而且让你在应对持久性数据结构时能使用得更加愉悦。
+
+### 这些库这样的付出值得吗？
+
+**不可变数据结构（在有些情况下）能让你无需考虑你写的代码所产生的副作用。如果你正在写一个component或app，它们的数据可能会无意中被另外的实体所更改，如果你用的是不可变数据结构，那么你其实就不用担心了。**也许使用不可变数据结构最主要的缺点在于内存性能上的问题，但是，话说回来，这点完全取决于你所使用的对象是否包含了大量的数据。
+
+## 我们还有很长的路要走
+
+在广大开发者都认同组合化的这种共识之下，我们在其他方面仍然存在着很多分歧：关注分离（Separation of concerns）,数据流（Data-flow），结构（Structure），不可变数据的必要性，数据绑定（Data-binding， 双向数据绑定并不总是优于单向数据绑定，这要看你如何给你组件中的状态进行建模），抽象的级别（level of magic for our abstractions）如何控制，渲染管道（rendering pipeline）的问题应该放在哪里解决（原生端还是虚拟对比（virtual diffing）），在用户界面如何实现60fps，模板（是的，我们尚未全部改成使用template标签）。
+
+## 向前和向上
+
+最终如何解决这些问题，归根结底还是需要你自己问自己三个问题：
+
+1.在使用特立独行的框架的时候你自己是否乐意？
+
+2.用已有的模块去编写问题的解决方案时你是否乐意？
+
+3.如果叫你自己从头开始构想架构和编写代码来解决这些问题，你乐不乐意？
+
+我是个白痴，自己也还没有把所有东西给想明白，我还在不停地学习中。所以，请不要拘束，自由地分享你对未来的应用架构的看法，不管是平台方面的、模式方面的还是框架方面的。如果我上面讲的有什么错误的话（错误肯定在所难免），欢迎提出更正。下面是我计划在假期阅读的书单，欢迎继续推荐：
+
+- [The Offline Cookbook](http://jakearchibald.com/2014/offline-cookbook/)
+- [Why it’s ridiculous to say ‘generators solve async’](https://gist.github.com/jkrems/04a2b34fb9893e4c2b5c)
+- [CSP and Transducers in JavaScript](http://phuu.net/2014/08/31/csp-and-transducers.html)
+- [Communicating Sequential Processes — Hoare](http://www.usingcsp.com/cspbook.pdf)
+- [Transducers and benchmarks](http://jlongster.com/Transducers.js-Round-2-with-Benchmarks)
+- [HTML Exports — Importing HTML via ES6 Modules](https://github.com/nevir/html-exports)
+- [Flux in Practice](https://medium.com/@garychambers108/flux-in-practice-ec08daa9041a)
+- [Practical Workflows for ES6 Modules](http://guybedford.com/practical-workflows-for-es6-modules)
+- [Traceur, Gulp, Browserify and ES6](http://www.mattgreer.org/articles/traceur-gulp-browserify-es6/)
+- [Functional Programming in Javascript === Garbage](http://awardwinningfjords.com/2014/04/21/functional-programming-in-javascript-equals-garbage.html)
+
+<i>注：你会发现Web Components的内容少了一大块，这是因为我在研究Chrome的时候，在[Web Components primitives]()和[Polymer]()上都写过相关文章了，可能这些就差不多了（或许还不够！），但是非常欢迎大家能分享在这方面的其他新的发现。</i>
+
+我对如何连接Web Components和虚拟DOM对比方法（Virtual-DOM diffing approaches）两者的相关话题特别感兴趣，从这些话题里你能看到组件的通信模式如何演化，同时你会感叹网页还是有待更多的应用开发者去改善。
 
 （时间仓促，能力有限，翻译错误在所难免，如有问题，请联系[melon](https://github.com/melon)或在下方评论）
 
