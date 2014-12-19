@@ -1,4 +1,4 @@
-title: 【翻】给它个五分钟
+title: 【译】给它个五分钟
 date: 2014-09-25 11:34
 categories:
 - Translation

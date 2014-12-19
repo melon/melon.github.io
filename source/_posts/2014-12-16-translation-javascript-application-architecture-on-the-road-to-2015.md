@@ -1,4 +1,4 @@
-title: 【翻】2015年JavaScript应用架构趋势
+title: 【译】2015年JavaScript应用架构趋势
 date: 2014-12-16 12:00:47
 categories:
 - Translation
