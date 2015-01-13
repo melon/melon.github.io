@@ -13,7 +13,7 @@ tags:
 我曾经告诉过某人我是一名架构师，恩，这是事实。。因为现在我不得不编造无数个精心构造的谎言去证明我确实是个架构师。好。。说正经的，我认为在即将步入2015年之际，谈一点有关JavaScript社区的应用架构方面的进展的话题多少是有点好处的。在本文中我将就组合化（composition），功能性边界（functional boundaries），模块化（modularity），不可变数据结构（immutable data structures），CSP通道（CSP channels）以及一些其他相关的话题谈谈我的见解。
 
 author: [Addy Osmani](https://medium.com/@addyosmani)
-translator: [melon](https://github.com/melon)
+translator: [melon](https://github.com/melon) (文中有诸多错误，感谢[hax](http://johnhax.net/)指出并提供正确的译法)
 original url: [JavaScript Application Architecture On The Road To 2015](https://medium.com/@addyosmani/javascript-application-architecture-on-the-road-to-2015-d8125811101b)
 
 ## 组合化
