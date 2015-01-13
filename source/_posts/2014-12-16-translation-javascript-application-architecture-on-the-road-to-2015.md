@@ -22,9 +22,9 @@ original url: [JavaScript Application Architecture On The Road To 2015](https://
 
 ![组合化的一个例子：图中的应用是由一些稍小的可复用的UI组件组合而成的，而这些UI组件本身由扩展或复用当前的一些组件或库实现的](https://d262ilb51hltx0.cloudfront.net/max/1764/1*8fuXs-f2LJHYnEfxGKYdLA.png)
 
-组合化正是导致关于React的组件，Ember的组件，Angular的directive，Polymer的元素以及原生的Web Components的话题最近很热的一个原因。我们或许会争论这些框架和库的风格孰优孰劣，但是我们却无需去怀疑组合化的这个方向是不是不对。注意：早期的一些玩JS框架（Dojo,YUI,ExtJS）的开发者曾极力推荐过组合化的概念，组合化的概念也出现很久了，但是直到最近大部分人才开始领会这种模型在前端开发方面的强大威力。
+组合化正是导致关于React的组件，Ember的组件，Angular的directive，Polymer的元素以及原生的Web Components的话题最近很热的一个原因。我们或许会争论这些框架和库的风格孰优孰劣，但是我们却无需去怀疑组合化的这个方向是不是不对。注意：早期的一些<del>玩</del>JS框架（Dojo,YUI,ExtJS）<del>的开发者</del>曾极力推荐过组合化的概念，组合化的概念也出现很久了，但是直到最近大部分人才开始领会这种模型在前端开发方面的强大威力。
 
-**组合化是一种用来应对应用复杂化问题的解决方案。**当前，web平台中的语言的演化都是朝着缓解当前复杂应用开发所带来的痛苦这一目标努力的。复杂本身有很多种形式，但是当我们观察一下过去几年中开发者们构建web应用的局面，就可以发现共同模式（common patterns）是很明显值得我们考虑围棋构建解决方案的一个方向。这就是为什么让Web Components概念被广大浏览器厂商所认同是一件相当重要的事情。即便你压根不乐意用上面提到的那些不同风格的框架和库（我会告诉你它们真的很强大），我也希望你能找到自己喜欢的组合化的解决方案。
+**组合化是一种用来应对应用复杂化问题的解决方案。**当前，web平台中的语言的演化都是朝着缓解当前复杂应用开发所带来的痛苦这一目标努力的。复杂本身有很多种形式，但是当我们观察一下过去几年中开发者们构建web应用的局面，就可以发现共同模式（common patterns）是很明显值得我们考虑<del>围棋构建解决方案</del>的用来应对这种复杂的一种方法<del>一个方向</del>。这就是为什么让Web Components概念被广大浏览器厂商所认同是一件相当重要的事情。即便你压根不乐意用上面提到的那些不同风格的框架和库（我会告诉你它们真的很强大），我也希望你能找到自己喜欢的组合化的解决方案。
 
 我希望未来能发生的是状态同步（state sychronisation）（同步你的model/server与组件中的DOM两者之间的状态）的改进以及充分发挥组合边界（composition boundaries）的威力。
 
@@ -46,11 +46,11 @@ original url: [JavaScript Application Architecture On The Road To 2015](https://
 
 那组件之间的通信呢？如果你正在研究解耦的、模块化的组件，那么下面有一些点。
 
-**通过组件提供的API直接引用并不推荐（除非是一些特别简单的应用），因为这会导致对别的组件的某些版本产生了直接依赖。**如果它们的API变动巨大，你就不得不吃被动升级代码和不得不解决奔溃的苦果。所以，你应该采用传统的全局事件系统或组件内的事件系统。如果你要在两个没有父子关系的模块之间进行通信，事件+订阅的方式仍旧是一种流行的做法。实际上，React推荐这种方法，除非组件间有父子关系，这种情况下，只要通过传递[props](http://facebook.github.io/react/tips/communicate-between-components.html)就能实现。Angular采用服务（Services）的方式来通信，Polymer则有一系列选择：自定义事件、变动侦测器（change watcher）以及<core-signals>元素。
+**通过组件提供的API直接引用并不推荐（除非是一些特别简单的应用），因为这会导致对别的组件的某些版本产生了直接依赖。**如果它们的API变动巨大，你就不得不吃被动升级代码和不得不解决奔溃的苦果。所以，你应该采用传统的全局事件系统或组件内的事件系统。如果你要在两个没有父子关系的模块之间进行通信，事件+订阅的方式仍旧是一种流行的做法。实际上，React推荐这种方法，除非组件间有父子关系，这种情况下，只要通过传递[props](http://facebook.github.io/react/tips/communicate-between-components.html)就能实现。Angular采用服务（Services）的方式来通信，Polymer则有一系列选择：自定义事件、变动侦测器（change watcher）以及&lt;core-signals&gt;元素。
 
-我们只能做这些了么？远远不是。**对于那些触发后就不管的事件，全局事件系统模型就已经能满足需求了，但是如果你需要含有状态性的事件（stateful events）或链接（chaining），这么做就不可取了。**当复杂度提升之后，你会发现这么做会使通信和流程控制变得混乱。虽然也许有很多方法来改进你的事件系统（例如函数响应式编程（functional reactive programming）），你也许会发现事件执行着巨量的代码。
+我们只能做这些了么？远远不是。**对于那些触发后就不管的事件，全局事件系统模型就已经能满足需求了，但是如果你需要含有状态性的事件（stateful events）或链接（chaining），这么做就不可取了。**当复杂度提升之后，你可能发现这么做事件会和通信以及流程控制交杂在一起<del>会使通信和流程控制变得混乱</del>。虽然也许有很多方法来改进你的事件系统（例如函数响应式编程（functional reactive programming）），你也许会发现事件执行着巨量的代码。
 
-**一个比全局事件系统更好的方式是通信顺序进程（CSP，Communicating Sequential Processes）**，它是一种用来描述并发系统中的通信的规范化的方法。CSP通道（CSP channels）可以在ClojureScript和Go语言中找到，并且在[core.async](https://github.com/clojure/core.async/)项目中规范化了。CSP可以处理那些需要信息传递的进程之间的协调配合，在通道中取数据和送数据的时候阻塞执行，从而能更轻松地传达复杂的异步流。它们所解决的问题，在某些时候，你为了实现相同效果，需要用到双工通道（duplex channels），或者需要依赖下面这种字串化的传统方法来实现：
+**一个比全局事件系统更好的方式是通信顺序进程（CSP，Communicating Sequential Processes）**，它是一种用来描述并发系统中的通信的规范化的方法。CSP通道（CSP channels）可以在ClojureScript和Go语言中找到，并且在[core.async](https://github.com/clojure/core.async/)项目中规范化了。CSP（不要和Content Security Policy搞混了）可以处理那些需要信息传递的进程之间的协调配合，在通道中取数据和送数据的时候阻塞执行，从而能更轻松地传达复杂的异步流。它们所解决的问题，在某些时候，你为了实现相同效果，需要用到双工通道（duplex channels），或者需要依赖下面这种约定格式的字符串的<del>字串化的传统</del>方法来实现：
 
 <blockquote style="text-align:left">
 thingNeedsPhoto { id: 001, uuid: “foo” }
@@ -61,7 +61,7 @@ thingPhoto { data: “../photo.png”, uuid: “foo” }
 
 ![](https://d262ilb51hltx0.cloudfront.net/max/1677/1*tdy1UQP2PIXjE7GtxHXwRA.png)
 
-**CSP的机制提供了一种抽象，使得系统中的一部分功能能控制另一部分功能，有了这样的基础之后，构建并发的协作机制就变得更容易了。**实际上CSP给你做了一些相对底层的架构。在函数响应式编程中，信号代表了随着时间不断变化的值。并且信号它有一个基于推送的接口，所以它是响应式的。函数响应式编程提供了一种纯粹的功能性接口，所以你无需手动触发事件，但是你能知道控制流结构，从而你可以根据基础信号定义自己的变换规则。函数响应式编程中的信号就可以用CSP通道来实现。
+**CSP的机制提供了一种抽象，使得系统中的一部分功能能控制另一部分功能，有了这样的基础之后，构建并发的协作机制就变得更容易了。**实际上CSP给你做了一些相对底层的架构。在函数响应式编程中，信号代表了随着时间不断变化的值。并且信号它有一个基于推送的接口，所以它是响应式的。函数响应式编程提供的是纯函数式的接口<del>了一种纯粹的功能性接口</del>，所以你不会去<del>无需手动</del>触发事件，但是你能知道控制流结构，从而你可以根据基础信号定义自己的变换规则。函数响应式编程中的信号就可以用CSP通道来实现。
 
 [James Long](http://jlongster.com/Taming-the-Asynchronous-Beast-with-CSP-in-JavaScript)和[Tom Ashworth](http://phuu.net/2014/08/31/csp-and-transducers.html)有几篇关于CSP和转换器（Transducers，组合式算法转换器）的干货文章，如果你想要的远不止是全局事件系统，这几篇文章值得一看。
 
@@ -75,7 +75,7 @@ thingPhoto { data: “../photo.png”, uuid: “foo” }
 
 ![@thlorenz和@domenic的es6ify使得在使用ES5和ES6功能（还能支持source map）的时候的工作流程变得非常优雅](https://d262ilb51hltx0.cloudfront.net/max/1408/1*tNh8NTBrl74k06Id07Wggw.png)
 
-**很多情况下我们都早已不在写代码的时候加入编译（build）步骤了，但是现在如果因为别人这么做就鄙视人家，这样的想法才是过时的。**而且很多JS库的作者都乐意在他们的编译前的代码中加入ES6的功能。
+**在很多情况下我们已经不能满足于ES6了，而且鄙视在创作代码时加入编译过程的想法几乎是过时了。**<del>很多情况下我们都早已不在写代码的时候加入编译（build）步骤了，但是现在如果因为别人这么做就鄙视人家，这样的想法才是过时的。</del>很多[JS库的作者](https://github.com/sindresorhus/esnext-showcase)都乐意在他们的编译前的代码中加入ES6的功能。
 
 **ES6的Modules功能解决了大量的我们在依赖和部署使遇到的问题，让我们在构建模块时能用明确的exports，按名称导入模块并保持模块名之间相互分离。**ES6的Modules功能其实相当于兼具了AMD的异步特点（浏览器需要）和CommonJS的清晰，同时能用更优雅的方式处理循环依赖问题。
 
@@ -105,7 +105,7 @@ ES6模块功能时的依赖都是静态的，所以我们能得到可分析的�
 
 另外我认为作为JS开发者，对脚本我们已经有了从某种程度上讲较为成熟的工具生态系统，但是如果回到HTML上，我们就不得不重写工具来实现HTML的依赖机制，这总让人觉得有点落后。我看到这个问题部分已经被解决了，利用像[Vulcanize](https://www.polymer-project.org/articles/concatenating-web-components.html)（用来缕清载入文件之间的依赖关系）这样的工具来解决，我希望的是这个问题在HTTP2全面普及的时候能完全消失。
 
-我个人对多少地方该用纯脚本，又有多少地方该用import比较纠结，当我们开始看ES6的模块的时候这两者的界限又该划在哪里我也比较迷惑。但即便如此，我认为HTML的import对资源加载是个很好的方式，但它在加载脚本的时候不会阻塞解析器（parser）（但是它们仍会阻塞load事件）。但我仍然很希望我们能在将来看到import，模块以及两者的互相操作的比例能发生变化。
+我个人对多少地方该用纯脚本，又有多少地方该用import比较纠结，当我们开始看ES6的模块的时候这两者的界限又该划在哪里我也比较迷惑。但即便如此，我认为HTML的import对资源加载是个很好的方式，但它在加载脚本的时候不会阻塞解析器（parser）（但是它们仍会阻塞load事件）。但我仍然觉得<del>很希望我们能在将来看到</del>在将来import、模块以及两者的互相操作的<del>比例能发生变化</del>情况会发生演变。
 
 ## 离线问题
 
@@ -113,25 +113,29 @@ ES6模块功能时的依赖都是静态的，所以我们能得到可分析的�
 
 在以前，解决这个问题是需要面对很多根本性的挑战，但现在情况有些好转。今年，web平台的API不断地进化，给我们提供了更好的基本类型（primitives），其中近期最有趣的一个就是[Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker_API/Using_Service_Workers)。Service Workers是一个可以让网站在离线的时候还能工作的API，它通过劫取网络请求，然后按照事先编好的程序告诉浏览器这种情况下应该如何应对这些请求。
 
+![Service Worker为Chrome Dev Summit网站提供了离线体验，这项功能在Chrome 40 beta以及以上版本中可用](https://d262ilb51hltx0.cloudfront.net/max/551/1*x0SAVPw0NR1Efq_Y__hqsA.png)
+
 这其实是AppCache本应该做，只不过AppCache的控制程度不对。用Service Workers可以缓存内容，修改伺服的内容和把网络仅仅视为一种功能增强。想要了解更多关于Service Worker的东西，可以去看Matt Gaunt的[Service Worker primer](http://www.html5rocks.com/en/tutorials/service-worker/introduction/)或Jake Archibald的[offline patterns](http://jakearchibald.com/2014/offline-cookbook/)。
 
 在2015年，我希望看到我们有越来越多的构建在Service Worker基础之上的路由和状态管理的库。对任何你浏览过的路径的第一等级的离线和同步支持的需求会特别庞大，特别是如果开发者能免费得到它们的情况下。
+
+![先睹为快：Android版本的Chrome里的推送API](https://d262ilb51hltx0.cloudfront.net/max/1080/1*YiLL1pNOixlZ2nN7xBp6AA.jpeg)
 
 Service Workers通过在重复访问时来缓存视图（view）和资源（asset），能显著提高性能。并且Service Workers只是一个基本的API，请求控制只是一些列由此带来的新功能中的一个，其他的功能像推送通知（Push Notifications）和后台同步（Background Synchronization）等也能因此实现。
 
 想了解当前Chrome是如何使用推送通知的，可以阅读Matt Gaunt的[Push Notifications & Service Worker](https://gauntface.com/blog/2014/12/15/push-notifications-service-worker)。
 
-## 组件API和“正面模式”
+## 组件API和“门面模式”
 
-有人或许会说我之前在文章中提过的“正面模式”在今天仍旧是可行的，特别是如果你注意不让组件里的实现细节不会泄露到全局API。如果你能为你的组件定义一个简洁、健壮的接口，使用者就可以继续利用这样的组件，而无需担心内部实现细节。这些都可以在任何时候花最少的代价来更改。
+有人或许会说我之前在文章中提过的<del>“正面模式”</del>“门面模式”在今天仍旧是可行的，特别是如果你注意不让组件里的实现细节不会泄露到全局API。如果你能为你的组件定义一个简洁、健壮的接口，使用者就可以继续利用这样的组件，而无需担心内部实现细节。这些都可以在任何时候花最少的代价来更改。
 
 我还要提一下的是这是一种比较好的模型，框架和库作者在开发公开组件应该遵循这样的模型。虽然这完全没有和Web Components绑在一起，我还是很高兴看到尽管Polymer里的paper-*元素不断地进化，但是内部的变化对对外的公共API造成的影响非常小。这对使用者来说再好不过了。别尝试打破“不要让用户感到惊讶”这一规则，也就是你的组件的用户不应该被你的更改所影响到。坚持这么做就能既让你的用户更高兴，也能让你的团队更高兴。
 
 ## 不可变和持久化的数据结构
 
-在我之前的关于大规模JS应用的文章里，我提到过不可变的和持久化的数据结构（immutable & persistent data structures）。如果你听过类似[immutable-js](https://github.com/facebook/immutable-js)或[Mori](http://swannodette.github.io/mori/)的库，但是却不清楚它们的价值在哪，那么你可能需要试试去看一下入门的文章。
+在我之前的关于大规模JS应用的文章里，我并没有真正提到过不可变的和持久化的数据结构（immutable & persistent data structures）。如果你听过类似[immutable-js](https://github.com/facebook/immutable-js)或[Mori](http://swannodette.github.io/mori/)的库，但是却不清楚它们的价值在哪，那么下面我简单介绍一下<del>你可能需要试试去看一下入门的文章</del>。
 
-不可变数据结构是一种一旦被创建后就不能再被更改的数据结构，这意味着有效地更改数据的方式就是创建一个数据副本。持久化的数据结构是一种在数据改变是能保持数据更改前版本的数据结构。像这样的数据结构是不可变的（它们的状态一旦被创建就无法修改）。更改并不会在原来的数据结构中发生，而是生成一个新的更新后的数据结构。所有指向原始数据结构的东西都会得到保证这个结构永远不会发生变化。
+不可变数据结构是一种一旦被创建后就不能再被更改的数据结构，这意味着有效地更改数据的方式就是创建一个可变的数据副本。持久化的数据结构是一种在数据改变是能保持数据更改前版本的数据结构。像这样的数据结构是不可变的（它们的状态一旦被创建就无法修改）。更改并不会在原来的数据结构中发生，而是生成一个新的更新后的数据结构。所有指向原始数据结构的东西都会得到保证这个结构永远不会发生变化。
 
 <blockquote style="text-align:left">
 持久化的数据结构的真正好处在于引用相等（referential equality），因此当比较内存中的地址时会显得特别清楚，你不仅拥有相同的对象，你还拥有相同的数据。 ---Pascal Hartig, Twitter
@@ -154,7 +158,7 @@ console.assert(todos.length === 3);
 
 按照上面的说法，当tods数组被创建之后，后面的任何一个操作，都不会改变这个数组。虽然你可能通过严格的代码就能保证数据结构不发生变化，但是用了不可变数据结构之后，这种“可能”就会编程“肯定”了。
 
-我之前曾经用现有的像Mutation Observers这样的平台技术来实现过一个Undo的项目，如果你使用这样的技术来做，你会发现内存消耗会直线上涨。但是要是采用持续性数据结构，内存使用量就会大大减少。
+我之前曾经用现有的像Mutation Observers这样的平台技术来实现过一个Undo的项目，如果你使用这样的技术来做，你会发现内存消耗会<del>直线</del>线性上涨。但是要是采用持续性数据结构，内存使用量就会大大减少。
 
 不可变这个特性有很多好处，包括：
 
@@ -182,11 +186,11 @@ console.assert(todos.length === 3);
 
 最终如何解决这些问题，归根结底还是需要你自己问自己三个问题：
 
-1.在使用特立独行的框架的时候你自己是否乐意？
+1.<del>在使用特立独行的框架的时候你自己是否乐意？</del>你是否乐意由框架帮你决定和做选择？
 
-2.用已有的模块去编写问题的解决方案时你是否乐意？
+2.<del>用已有的模块去编写问题的解决方案时你是否乐意？</del>你是否乐意使用现有的模块来“组合”出解决方案？
 
-3.如果叫你自己从头开始构想架构和编写代码来解决这些问题，你乐不乐意？
+3.<del>如果叫你自己从头开始构想架构和编写代码来解决这些问题，你乐不乐意？</del>你是否乐意从头到尾都自己来？
 
 我是个白痴，自己也还没有把所有东西给想明白，我还在不停地学习中。所以，请不要拘束，自由地分享你对未来的应用架构的看法，不管是平台方面的、模式方面的还是框架方面的。如果我上面讲的有什么错误的话（错误肯定在所难免），欢迎提出更正。下面是我计划在假期阅读的书单，欢迎继续推荐：
 
