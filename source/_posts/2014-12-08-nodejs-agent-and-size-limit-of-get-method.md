@@ -28,6 +28,8 @@ client_req.pipe(proxy, {
 
 我在想会不会是因为这代码太“原始”、太“底层”，所以才这么“脆弱”。于是后来我加足了错误处理程序。
 
+<!--more-->
+
 {% code lang:js %}
 var proxy = http.request(options, function (res) {
     res.pipe(client_res, {

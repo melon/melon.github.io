@@ -77,6 +77,8 @@ var EventListener = {
 module.exports = EventListener;
 {% endcode %}
 
+<!--more-->
+
 从上面的代码可以看到针对两种事件顺序：**事件冒泡（event bubbling）**和**事件捕获（event capturing）**，分别采用了listen和capture函数。事件冒泡又有两种实现方法**addEventListener**和**attachEvent**两种，而事件捕获却只有一种。对于这些诡异的情况，难免会让人心声疑惑：为什么一个看似很简单的事件模型，需要这么多不同的实现方式？
 
 查阅了一些资料之后，找到了一些解释，总结来说，就是“历史遗留问题”。

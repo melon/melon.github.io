@@ -24,6 +24,8 @@ original url: [JavaScript Application Architecture On The Road To 2015](https://
 
 组合化正是导致关于React的组件，Ember的组件，Angular的directive，Polymer的元素以及原生的Web Components的话题最近很热的一个原因。我们或许会争论这些框架和库的风格孰优孰劣，但是我们却无需去怀疑组合化的这个方向是不是不对。注意：早期的一些<del>玩</del>JS框架（Dojo,YUI,ExtJS）<del>的开发者</del>曾极力推荐过组合化的概念，组合化的概念也出现很久了，但是直到最近大部分人才开始领会这种模型在前端开发方面的强大威力。
 
+<!--more-->
+
 **组合化是一种用来应对应用复杂化问题的解决方案。**当前，web平台中的语言的演化都是朝着缓解当前复杂应用开发所带来的痛苦这一目标努力的。复杂本身有很多种形式，但是当我们观察一下过去几年中开发者们构建web应用的局面，就可以发现共同模式（common patterns）是很明显值得我们考虑<del>围棋构建解决方案</del>的用来应对这种复杂的一种方法<del>一个方向</del>。这就是为什么让Web Components概念被广大浏览器厂商所认同是一件相当重要的事情。即便你压根不乐意用上面提到的那些不同风格的框架和库（我会告诉你它们真的很强大），我也希望你能找到自己喜欢的组合化的解决方案。
 
 我希望未来能发生的是状态同步（state sychronisation）（同步你的model/server与组件中的DOM两者之间的状态）的改进以及充分发挥组合边界（composition boundaries）的威力。

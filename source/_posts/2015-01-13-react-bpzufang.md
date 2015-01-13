@@ -1,7 +1,7 @@
 title: 北漂租房网的reactify计划
 date: 2015-01-13 16:41:42
 categories:
-- IT
+- 碎
 tags:
 - react
 - bpzufang.com
