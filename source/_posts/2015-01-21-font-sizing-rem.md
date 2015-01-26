@@ -2,6 +2,7 @@ title: css中字体的rem尺寸
 date: 2015-01-21 11:54:14
 categories:
 - IT
+- Notes
 tags:
 - css
 - rem
@@ -12,6 +13,7 @@ tags:
 1. 用px设置
 2. 用em设置
 
+<!--more-->
 
 ### 用px设置
 
