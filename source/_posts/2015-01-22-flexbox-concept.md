@@ -162,6 +162,14 @@ main-size即width或height的值，根据main axis的方向决定。这里如果
 
 注意，**float**,**clear**和**vertical-align**不会对一个flexbox元素产生效果
 
+## 附
+
+flexbox除了在IE10上支持有些恶心之外（不支持IE10以下的版本），在其他版本浏览器，无论是pc或是手机上，勉强都能够支持了。尤其在手机上，除了一些老版本的支持度有限，基本上可以开始大范围用flexbox了。我觉得是时候可以开始尝试使用了。
+
+附上flexbox的hack
+
+https://github.com/melon/flexbox-mixin
+
 
 - References:
     1. [A Complete Guide to Flexbox](http://css-tricks.com/snippets/css/a-guide-to-flexbox/)
