@@ -27,7 +27,7 @@ containing block：
 
 每个box会根据它的containing block来定位，但并不一定局限在containing block里，有可能overflow。
 
-### box的类型
+### 控制box的生成
 
 #### block-level elements, block boxes, anonymous block boxes
 
@@ -92,7 +92,7 @@ inline box: 既是inine-level的，同时它的内容会参加当前inline容器
 
 在处理table时，会有更多的anonymous boxes生成。
 
-#### positioning schemes
+### positioning schemes
 
 1. Normal flow: 包括block-level boxes的block formatting，inline-level boxes的inline formatting，和block-level boxes以及inline-level boxes的relative positioninig。
 
@@ -102,6 +102,20 @@ inline box: 既是inine-level的，同时它的内容会参加当前inline容器
 
 out of flow: 如果一个元素设置成浮动、绝对定位或者是根元素，成为out of flow
 in flow: out of flow的反面
+
+#### position属性
+
+relative: 'position:relative'的效果在table-row-group,table-header-group,table-footer-group,table-row,table-column-group,table-column,table-cell,table-caption上未定义
+
+absolute:
+thoug absolutely positioned boxes have margins, they do not **collapse** with other margins
+
+fixed:
+同样margin不会collapse；不同设备上的不同表现；
+
+### 正常文档流
+
+正常文档流中的box归属于一个formatting context,是block的或inline的，但只取其一。block-level box参加block formatting context, inline-level box参加inline formatting context。
 
 
 
