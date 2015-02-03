@@ -108,7 +108,7 @@ in flow: out of flow的反面
 relative: 'position:relative'的效果在table-row-group,table-header-group,table-footer-group,table-row,table-column-group,table-column,table-cell,table-caption上未定义
 
 absolute:
-thoug absolutely positioned boxes have margins, they do not **collapse** with other margins
+though absolutely positioned boxes have margins, they do not **collapse** with other margins
 
 fixed:
 同样margin不会collapse；不同设备上的不同表现；
@@ -116,6 +116,20 @@ fixed:
 ### 正常文档流
 
 正常文档流中的box归属于一个formatting context,是block的或inline的，但只取其一。block-level box参加block formatting context, inline-level box参加inline formatting context。
+
+#### block formatting contexts
+
+下列情况元素会给它们的内容创建一个新的bfc
+- floats
+- absolutely positioned elements
+- block containers that are not block boxes(例如inline-blocks,table-cells,table-captions)
+- block boxes with 'overflow' other than 'visible'(这个值被冒泡到viewport的情况不算)
+
+在bfc中，boxes在垂直方向上，从containing block的最上边开始，一个一个叠在一起，boxes之间的间距由margin决定，会有**collapse**的情形发生。
+
+在bfc中，每个box的左外边缘（left outer edge）紧贴containing block的左边缘（left edge）（对于rtl，右边缘），即使是有浮动的情况下也是这样的（虽然一个box的line boxes可能会因为浮动而shrink）。
+
+
 
 
 
