@@ -125,11 +125,17 @@ fixed:
 - block containers that are not block boxes(例如inline-blocks,table-cells,table-captions)
 - block boxes with 'overflow' other than 'visible'(这个值被冒泡到viewport的情况不算)
 
-在bfc中，boxes在垂直方向上，从containing block的最上边开始，一个一个叠在一起，boxes之间的间距由margin决定，会有**collapse**的情形发生。
+在bfc中，boxes在垂直方向上，从containing block的最上边开始，一个一个叠在一起，上下boxes之间的间距由margin决定，会有**collapse**的情形发生。
 
 在bfc中，每个box的左外边缘（left outer edge）紧贴containing block的左边缘（left edge）（对于rtl，右边缘），即使是有浮动的情况下也是这样的（虽然一个box的line boxes可能会因为浮动而shrink）。
 
+#### inline formatting contexts
 
+在ifc中，boxes在水平方向上，一个一个紧挨着。水平方向上的margin,border,padding才有效。垂直方向上，boxes可能按bottom,top或者文字的baseline来对齐。那个包含一行的所有box的长方形区域被称为line box。
+
+line box的宽度由containing block和是否浮动决定，高度是由line height的计算机制决定。
+
+line box的高度总是能容纳所有box，而且它的高度可能比它所包含的最高的box还要高一点（例如，当box是按baseline对齐的）
 
 
 
