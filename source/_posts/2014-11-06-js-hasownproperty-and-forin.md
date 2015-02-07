@@ -53,3 +53,5 @@ for (var key2 in b) {
 - References:
     1.[Object.prototype.hasOwnProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
     2.[for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
+- Related:
+    1. [javascript中Object初始化的一些概念厘清](/blog/2015/02/07/js-object-initializer-concept/)

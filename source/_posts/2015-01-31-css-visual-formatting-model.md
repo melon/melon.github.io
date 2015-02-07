@@ -141,6 +141,8 @@ line box的高度总是能容纳所有box，而且它的高度可能比它所包
 
 如果一个inline box的宽度大于line box，它会分成多行。如果无法分成多行（例如inline box只包含一个字符，或语言特性要求不允许一个单词折行，或inline box受white-space的nowrap或pre影响时），inline box就会overflow。
 
+### 浮动
+
 
 
 
