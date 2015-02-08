@@ -27,6 +27,8 @@ containing block：
 
 每个box会根据它的containing block来定位，但并不一定局限在containing block里，有可能overflow。
 
+<!--more-->
+
 ### 控制box的生成
 
 #### block-level elements, block boxes, anonymous block boxes
@@ -140,11 +142,6 @@ line box的高度总是能容纳所有box，而且它的高度可能比它所包
 通常，line box的左边缘会紧贴它的containing block的左边缘，右边缘也紧贴containing block的右边缘。但是，浮动boxes可能会介于containing block边缘与line box边缘之间，因此有些行的line box的宽度可能会窄于containing block。
 
 如果一个inline box的宽度大于line box，它会分成多行。如果无法分成多行（例如inline box只包含一个字符，或语言特性要求不允许一个单词折行，或inline box受white-space的nowrap或pre影响时），inline box就会overflow。
-
-### 浮动
-
-
-
 
 
 

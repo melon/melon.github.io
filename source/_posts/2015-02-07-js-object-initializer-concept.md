@@ -14,8 +14,6 @@ Object的初始化方法有三种:
 - Object.create()
 - literal notation
 
-第一种用得最少，第三种特别常用，第二种其次
-
 用法示例：
 {% code lang:js %}
 var o = {};
@@ -50,6 +48,8 @@ var o = {
   ["b" + "ar"]: "there",
 };
 {% endcode %}
+
+<!--more-->
 
 ### 重复的属性名
 
