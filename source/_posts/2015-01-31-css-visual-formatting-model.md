@@ -23,7 +23,7 @@ vfm模型规定，document tree中的每个元素都会生成零个或多个box�
 - 外部因素（例如，viewport的尺寸、图片的固有尺寸等）
 
 containing block：
-很多box的位置和尺寸是根据这个长方形的被称为containing block的box算出来的。同常我们说，一个box为它的子元素建立了一个containing block；一个box的containing block指的是容纳这个box的父级box。
+很多box的位置和尺寸是根据这个长方形的被称为containing block的box算出来的。通常我们说，一个box为它的子元素建立了一个containing block；一个box的containing block指的是容纳这个box的父级box。
 
 每个box会根据它的containing block来定位，但并不一定局限在containing block里，有可能overflow。
 
