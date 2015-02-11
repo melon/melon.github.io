@@ -19,6 +19,8 @@ defer虽然支持到IE6，但是无法保证script的执行顺序，所以如果
 
 对于一些完全和页面逻辑无关的script脚本推荐用这两个属性，如统计代码
 
+目前最优的处理方式应该是把所有必须要用到的script合并成一个文件，这样就无需考虑不同文件请求快慢的问题。
+
 - References:
 	1. [Asynchronous and deferred JavaScript execution explained](http://peter.sh/experiments/asynchronous-and-deferred-javascript-execution-explained/)
 	2. [script[defer] doesn't work in IE<=9](https://github.com/h5bp/lazyweb-requests/issues/42)
