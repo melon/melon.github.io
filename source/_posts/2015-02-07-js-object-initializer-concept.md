@@ -62,7 +62,7 @@ console.log(a); // { x: 2}
 
 ### __proto__的修改
 
-1. 采用**__proto__: value**或**"__proto__": value**的形式定义属性，并不会创建一个叫__proto__的属性。如果value是一个**对象**或**null**，这种属性定义会去更改这个对象的内部属性**[[Prototype]]**。（如果不是对象或null，则不会有任何效果）
+1. 采用**\_\_proto\_\_: value**或**"\_\_proto\_\_": value**的形式定义属性，并不会创建一个叫\_\_proto\_\_的属性。如果value是一个**对象**或**null**，这种属性定义会去更改这个对象的内部属性**[[Prototype]]**。（如果不是对象或null，则不会有任何效果）
 
 示例：
 {% code lang:js %}
