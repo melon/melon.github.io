@@ -29,7 +29,7 @@ var defer = typeof setImmediate === 'function'
 var defer = typeof setImmediate === 'function'
   ? setImmediate
   : function(fn){
-        var args = Array.prototype.slice.call(1);
+        var args = Array.prototype.slice.call(arguments, 1);
         process.nextTick(function () {
             fn.apply(fn, args);
         });
