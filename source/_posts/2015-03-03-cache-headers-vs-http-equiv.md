@@ -24,3 +24,5 @@ tags:
   1. [Useful HTML Meta Tags](http://www.i18nguy.com/markup/metatags.html)
   2. [A Beginner's Guide to HTTP Cache Headers](http://www.mobify.com/blog/beginners-guide-to-http-cache-headers/)
   3. [how should cache control be set in the requests](http://webmasters.stackexchange.com/a/34588)
+- Related:
+  1. [HTTP缓存](/blog/2015/03/08/http-caching/)

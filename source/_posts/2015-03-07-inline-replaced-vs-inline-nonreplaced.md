@@ -24,6 +24,8 @@ The content of replaced elements is not considered in the CSS rendering model.
 
 那为什么会有这两种分类？
 
+<!--more-->
+
 我想其中一个很重要的原因也许就是从css角度讲它们两类的展现规则会有些不同，所以需要区分，以便分别制定规则。
 
 我觉得block-level的情况下，这两类元素的展现方式可能是挺直觉化的，所以并不是难点。倒是在inline的情况下，这两类会产生一些非直觉化的效果，所以对这种情况的剖析才是本文的重点。
