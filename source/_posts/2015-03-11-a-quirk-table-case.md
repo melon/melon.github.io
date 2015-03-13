@@ -21,6 +21,8 @@ tags:
 
 首先我想到既然是inline-table这样的inline-level的元素，它们在水平方向上的展现形式是排成一行，它们的box会被包含在line box里。那么排成一行时它们垂直方向上的对齐方式总有些讲究吧，没指定vertical-align，默认的应该是baseline。
 
+<!--more-->
+
 所谓按baseline排列，规范里说了
 
 **Align the baseline of the box with the baseline of the parent box.**

@@ -4,6 +4,7 @@ categories:
 - IT
 tags:
 - javascript
+- underscore
 - performance
 ---
 今天这篇文章要从页面中的滚动事件说起。近来视差网站、滚动到底自动加载的流行，使得window.onscroll这个滚动事件的应用也变得越来越多。但是onscroll事件的触发频率高的特点在很多时候成为了影响页面性能的一个比较大的因素。每次短距离的滚动都会触发很多次的onscroll事件回调，如果每个回调触发都完整执行一遍回调函数里的全部代码，势必会影响页面性能。所以在使用onscroll事件的时候，我们会常常用到一个hack。
