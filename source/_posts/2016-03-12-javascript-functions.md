@@ -4,7 +4,7 @@ categories:
 - IT
 tags:
 - javascript
-- functions
+- function
 ---
 三种function：
 
