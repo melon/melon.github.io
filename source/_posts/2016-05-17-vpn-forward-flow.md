@@ -22,6 +22,59 @@ tags:
 - 在国内主机上将OpenVPN接受的流量转发到ShadowVPN
 - 最后就是在苹果设备上使用OpenVPN客户端来连接国内主机了（当然电脑也可以安装相关软件连接）
 
+附：ShadowVPN启动和停止时的脚本
+
+启动：
+
+{% code lang:bash %}
+#!/bin/sh
+
+# shadow routing table is for shadowVPN
+# echo "200 shadow" >> /etc/iproute2/rt_tables
+
+# tun1 is shadowVPN interface
+ip route add default dev tun1
+
+# specify which ip range to use this routing table, 10.8.0.0/24 is the source ip range for openVPN
+ip rule add from 10.8.0.0/24 table shadow
+
+# use SNAT to change ip packets' source ip address, 10.7.0.2 is shadowVPN's ip
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to-source 10.7.0.2
+
+# flush routing cache
+ip route flush cache
+
+# start shadowVPN process
+shadowvpn -c /etc/shadowvpn/client.conf -s start
+{% endcode %}
+
+停止：
+
+{% code lang:bash %}
+#!/bin/sh
+
+# shadow routing table is for shadowVPN
+# echo "200 shadow" >> /etc/iproute2/rt_tables
+
+# tun1 is shadowVPN interface
+# delete interface
+ip route del default dev tun1
+
+# specify which ip range to use this routing table, 10.8.0.0/24 is the source ip range for openVPN
+# delete rule
+ip rule del from 10.8.0.0/24 table shadow
+
+# use SNAT to change ip packets' source ip address, 10.7.0.2 is shadowVPN's ip
+# remove rule
+iptables -t nat -D POSTROUTING -s 10.8.0.0/24 -j SNAT --to-source 10.7.0.2
+
+# flush routing cache
+ip route flush cache
+
+# stop shadowVPN process
+shadowvpn -c /etc/shadowvpn/client.conf -s stop
+{% endcode %}
+
 References:
 - [https://gist.github.com/ihciah/883068c5d1beb499a016](https://gist.github.com/ihciah/883068c5d1beb499a016)
 - [https://github.com/OkamiSupport/VPN-traffic-redirect-to-another-vpn-tunnel](https://github.com/OkamiSupport/VPN-traffic-redirect-to-another-vpn-tunnel)
